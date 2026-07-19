@@ -1,26 +1,52 @@
 import java.util.PriorityQueue;
 import java.util.Queue;
 
+/**
+ * GestorAtencion: Administra la cola de solicitudes pendientes utilizando
+ * una PriorityQueue para asegurar el procesamiento basado en el nivel de urgencia.
+ */
 public class GestorAtencion {
-    // Usamos PriorityQueue como implementación de la interfaz Queue
+
+    // Cola de prioridad: ordena automáticamente según el compareTo de SolicitudBancaria
     private Queue<SolicitudBancaria> colaPendientes = new PriorityQueue<>();
 
-    // Método para agregar a la cola
+    /**
+     * Inserta una solicitud en la cola de atención.
+     * La posición será determinada automáticamente por la prioridad definida.
+     */
     public void encolarSolicitud(SolicitudBancaria solicitud) {
-        colaPendientes.offer(solicitud);
+        if (solicitud != null) {
+            colaPendientes.offer(solicitud);
+        }
     }
 
-    // Método para procesar (atender) la siguiente solicitud
+    /**
+     * Extrae y retorna la solicitud con mayor prioridad (menor valor numérico).
+     * @return SolicitudBancaria la siguiente en ser atendida, o null si está vacía.
+     */
     public SolicitudBancaria atenderSiguiente() {
-        return colaPendientes.poll(); // Extrae y retorna el primero
+        return colaPendientes.poll();
     }
 
+    /**
+     * Verifica si existen solicitudes pendientes en la estructura.
+     */
     public boolean hayPendientes() {
         return !colaPendientes.isEmpty();
     }
 
-    // Método para consultar el próximo elemento sin extraerlo
+    /**
+     * Retorna la solicitud de mayor prioridad sin extraerla de la cola.
+     * Útil para vistas previas de atención.
+     */
     public SolicitudBancaria verPrimero() {
         return colaPendientes.peek();
+    }
+
+    /**
+     * Retorna el número actual de solicitudes en espera.
+     */
+    public int obtenerCantidadPendientes() {
+        return colaPendientes.size();
     }
 }
