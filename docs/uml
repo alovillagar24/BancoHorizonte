@@ -47,6 +47,11 @@ RELACIONES DE INTEGRACIÓN:
 [MainBanco] --(1:1)--> [GestorGrafo]
 [MainBanco] --(1:1)--> [GestorHistorial]
 
+RELACIONES DE MODELADO DE DATOS (ER):
+[SOLICITUD]   --(1:N)--> [HISTORIAL]
+[SUCURSAL]    --(1:N)--> [SOLICITUD]
+[SUCURSAL]    --(1:1)--> [SUCURSAL] (Jerarquía)
+
 -- Diagrama Entidad-Relación (ER) código para mermaid live
 
 erDiagram
