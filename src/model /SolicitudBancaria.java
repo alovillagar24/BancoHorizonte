@@ -1,78 +1,64 @@
-import java.time.LocalDateTime;
-
+/**
+ * Clase modelo que representa una incidencia dentro del sistema Banco Horizonte.
+ * Implementa Comparable para facilitar la gestión en colas de prioridad.
+ */
 public class SolicitudBancaria implements Comparable<SolicitudBancaria> {
 
-    // ==========================================
-    // 1. ATRIBUTOS (Encapsulamiento estricto)
-    // ==========================================
-    // Atributos inmutables (no pueden cambiar una vez creados)
-    private final String idSolicitud;
-    private final LocalDateTime fechaRegistro;
-    private final int numeroTurno;
+    // Identificador único generado mediante marca de tiempo para trazabilidad (INC-1-timestamp)
+    private String idSolicitud;
 
-    // Atributos mutables (pueden cambiar durante el ciclo de vida del caso)
-    private String tipoSolicitud;
+    // Categoría operativa (ej. 'Técnica', 'Fraude', 'Atención al Cliente')
+    private String tipo;
+
+    // Descripción detallada de la incidencia
     private String descripcion;
-    private int nivelPrioridad;
+
+    // Nivel de urgencia: 1 (Alta), 2 (Media), 3 (Baja)
+    private int prioridad;
+
+    // Turno asignado para el ordenamiento cronológico
+    private int turno;
+
+    // Estado del ciclo de vida: REGISTRADA, ATENDIDO
     private String estado;
 
-    // ==========================================
-    // 2. CONSTRUCTOR ESPERADO
-    // ==========================================
-    public SolicitudBancaria(String idSolicitud, String tipoSolicitud, String descripcion,
-                             int nivelPrioridad, int numeroTurno) {
-        // Datos ingresados en la captura
+    /**
+     * Constructor principal. Inicializa la solicitud con los datos necesarios
+     * para su trazabilidad en todas las estructuras de datos del sistema.
+     */
+    public SolicitudBancaria(String idSolicitud, String tipo, String descripcion, int prioridad, int turno) {
         this.idSolicitud = idSolicitud;
-        this.tipoSolicitud = tipoSolicitud;
+        this.tipo = tipo;
         this.descripcion = descripcion;
-        this.nivelPrioridad = nivelPrioridad;
-        this.numeroTurno = numeroTurno;
-
-        // Datos asignados automáticamente por el sistema (Reglas operativas)
-        this.estado = "PENDIENTE";
-        this.fechaRegistro = LocalDateTime.now();
+        this.prioridad = prioridad;
+        this.turno = turno;
+        this.estado = "REGISTRADA";
     }
 
-    // ==========================================
-    // 3. MÉTODOS BÁSICOS (Getters)
-    // ==========================================
-    public String getIdSolicitud() { return idSolicitud; }
-    public String getTipoSolicitud() { return tipoSolicitud; }
-    public String getDescripcion() { return descripcion; }
-    public int getNivelPrioridad() { return nivelPrioridad; }
-    public String getEstado() { return estado; }
-    public LocalDateTime getFechaRegistro() { return fechaRegistro; }
-    public int getNumeroTurno() { return numeroTurno; }
-
-    // ==========================================
-    // 4. MÉTODOS DE MODIFICACIÓN (Setters Controlados)
-    // ==========================================
-    public void setEstado(String nuevoEstado) {
-        this.estado = nuevoEstado;
-    }
-
-    public void setNivelPrioridad(int nuevaPrioridad) {
-        this.nivelPrioridad = nuevaPrioridad;
-    }
-
-    // Método operativo para la gestión y resolución de la incidencia
-    public void agregarNotaSeguimiento(String nota) {
-        this.descripcion = this.descripcion + " | [Actualización]: " + nota;
-    }
-
-    // ==========================================
-    // 5. REPRESENTACIÓN DEL OBJETO
-    // ==========================================
-    @Override
-    public String toString() {
-        return String.format("[%s] Turno: %d | Tipo: %s | Prioridad: %d | Estado: %s",
-                idSolicitud, numeroTurno, tipoSolicitud, nivelPrioridad, estado);
-    }
-
-    // Implementación requerida para la Cola de Prioridad
+    /**
+     * Define el criterio de ordenamiento para la PriorityQueue.
+     * Basado en el valor de prioridad: menor valor numérico indica mayor urgencia.
+     */
     @Override
     public int compareTo(SolicitudBancaria otra) {
-        // Orden descendente: el valor más alto (prioridad 3) se atiende primero
-        return Integer.compare(otra.getNivelPrioridad(), this.getNivelPrioridad());
+        return Integer.compare(this.prioridad, otra.prioridad);
+    }
+
+    // --- Métodos de acceso (Getters/Setters) ---
+
+    public String getIdSolicitud() { return idSolicitud; }
+
+    public String getEstado() { return estado; }
+
+    /**
+     * Permite la actualización del estado conforme la solicitud avanza
+     * por los distintos gestores del sistema.
+     */
+    public void setEstado(String estado) { this.estado = estado; }
+
+    @Override
+    public String toString() {
+        return String.format("[%s] %s | Prioridad: %d | Estado: %s | Turno: %d",
+                idSolicitud, tipo, prioridad, estado, turno);
     }
 }
