@@ -1,5 +1,5 @@
 [ DOCUMENTACIÓN TÉCNICA: SISTEMA "BANCO HORIZONTE" ]
-VERSIÓN 1.0 — © 2026 PROCESAMIENTO DE DATOS
+VERSIÓN 1.2 — © 2026 PROCESAMIENTO DE DATOS
 NOTA AL OPERADOR: Lea atentamente este manual antes de inicializar la consola. 
 El uso indebido de las estructuras de memoria puede resultar en la pérdida de la bitácora de eventos.
 
