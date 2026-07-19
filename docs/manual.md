@@ -11,17 +11,17 @@ El sistema BANCO HORIZONTE ha sido diseñado para centralizar estas operaciones,
 II. CAPACIDADES DEL SISTEMA
 El software provee al operador las siguientes funciones integradas:
 
-[INPUT] REGISTRO DE SOLICITUDES: Ingreso de datos mediante folios únicos.
-[QUEUE] PRIORIZACIÓN: Clasificación inteligente de incidencias según urgencia operativa.
-[STACK/LIST] BITÁCORA: Mantenimiento de una secuencia histórica imborrable.
-[TREE/GRAPH] RELACIONES: Mapeo de la estructura jerárquica de sucursales y sus incidencias vinculadas.
+---> [INPUT] REGISTRO DE SOLICITUDES: Ingreso de datos mediante folios únicos.
+---> [QUEUE] PRIORIZACIÓN: Clasificación inteligente de incidencias según urgencia operativa.
+---> [STACK/LIST] BITÁCORA: Mantenimiento de una secuencia histórica imborrable.
+---> [TREE/GRAPH] RELACIONES: Mapeo de la estructura jerárquica de sucursales y sus incidencias vinculadas.
 
 III. ARQUITECTURA DE DATOS (ESPECIFICACIONES)
 El sistema opera mediante módulos gestores (Lógica centralizada):
 
-GestorAtencion: Control de la Cola de Prioridad.
-GestorArbol: Organización jerárquica de datos.
-GestorGrafo: Análisis de redes de sucursales.
-GestorHistorial: Bitácora lineal y cronológica.
+---> GestorAtencion: Control de la Cola de Prioridad.
+---> GestorArbol: Organización jerárquica de datos.
+---> GestorGrafo: Análisis de redes de sucursales.
+---> GestorHistorial: Bitácora lineal y cronológica.
 
 [SISTEMA LISTO]
