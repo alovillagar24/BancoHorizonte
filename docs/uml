@@ -1,0 +1,117 @@
+**************************************************************************
+*                                                                        *
+*  DIAGRAMA DE CLASES UML - BANCO HORIZONTE                             *
+*                                                                        *
+**************************************************************************
+
+> MODELOS (Entidades):
+  +-----------------------+      +-------------+      +--------------+
+  | SolicitudBancaria     |      | Nodo        |      | NodoArbol    |
+  +-----------------------+      +-------------+      +--------------+
+  | - id: String          |      | - data: Obj |      | - id: String |
+  | - tipo: String        |      | - next: Nodo|      | - left: Node |
+  | - prioridad: int      |      +-------------+      | - right: Node|
+  +-----------------------+                           +--------------+
+
+> GESTORES (Lógica):
+  +-----------------------+      +------------------+
+  | GestorAtencion        |      | GestorArbol      |
+  +-----------------------+      +------------------+
+  | - cola: PriorityQueue |      | - root: NodoArbol|
+  +-----------------------+      +------------------+
+  | + agregar(solicitud)  |      | + insertar(id)   |
+  +-----------------------+      +------------------+
+
+  +-----------------------+      +------------------+
+  | GestorGrafo           |      | GestorHistorial  |
+  +-----------------------+      +------------------+
+  | - adjList: Map        |      | - head: Nodo     |
+  +-----------------------+      +------------------+
+  | + conectar(n1, n2)    |      | + registrar(sol) |
+  +-----------------------+      +------------------+
+
+> NUCLEO:
+  +-------------------------------------------------------+
+  | MainBanco                                             |
+  +-------------------------------------------------------+
+  | - mapaSolicitudes: HashMap<String, SolicitudBancaria> |
+  | + main(args: String[])                                |
+  +-------------------------------------------------------+
+
+**************************************************************************
+
+RELACIONES DE INTEGRACIÓN:
+[MainBanco] --(1:1)--> [SolicitudBancaria]
+[MainBanco] --(1:1)--> [GestorAtencion]
+[MainBanco] --(1:1)--> [GestorArbol]
+[MainBanco] --(1:1)--> [GestorGrafo]
+[MainBanco] --(1:1)--> [GestorHistorial]
+
+**************************************************************************
+
+-- Para mermaid live
+
+classDiagram 
+    class MainBanco {
+        -HashMap<String, SolicitudBancaria> mapaSolicitudes
+        -GestorAtencion gAtencion
+        -GestorArbol gArbol
+        -GestorGrafo gGrafo
+        -GestorHistorial gHistorial
+        +main(String[] args)
+        +inicializarSistema()
+    }
+
+    class SolicitudBancaria {
+        -String id
+        -String tipo
+        -int prioridad
+    }
+
+    class GestorAtencion {
+        -PriorityQueue cola
+        +agregar(SolicitudBancaria)
+        +atenderSiguiente()
+    }
+
+    class GestorArbol {
+        -NodoArbol root
+        +insertar(String id)
+        +buscar(String id)
+    }
+
+    class GestorGrafo {
+        -Map adjList
+        +conectar(String n1, String n2)
+        +obtenerRelaciones()
+    }
+
+    class GestorHistorial {
+        -Nodo head
+        +registrar(SolicitudBancaria)
+        +imprimirLog()
+    }
+
+    class Nodo {
+        -Object data
+        -Nodo next
+    }
+
+    class NodoArbol {
+        -String id
+        -NodoArbol left
+        -NodoArbol right
+    }
+
+    MainBanco --> SolicitudBancaria : Gestiona
+    MainBanco --> GestorAtencion : Usa
+    MainBanco --> GestorArbol : Usa
+    MainBanco --> GestorGrafo : Usa
+    MainBanco --> GestorHistorial : Usa
+    GestorAtencion ..> SolicitudBancaria : Procesa
+    GestorHistorial --> Nodo : Usa
+    GestorArbol --> NodoArbol : Usa
+
+**************************************************************************
+
+[DISEÑO_UML]
