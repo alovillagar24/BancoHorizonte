@@ -1,0 +1,27 @@
+[ DOCUMENTACIÓN TÉCNICA: SISTEMA "BANCO HORIZONTE" ]
+VERSIÓN 1.0 — © 2026 PROCESAMIENTO DE DATOS
+NOTA AL OPERADOR: Lea atentamente este manual antes de inicializar la consola. 
+El uso indebido de las estructuras de memoria puede resultar en la pérdida de la bitácora de eventos.
+
+I. RESUMEN EJECUTIVO (EL PROBLEMA)
+En el entorno bancario actual, el flujo de datos es caótico. 
+La gestión de incidencias requiere una arquitectura capaz de procesar solicitudes de forma CRONOLÓGICA, JERÁRQUICA y PRIORITARIA. 
+El sistema BANCO HORIZONTE ha sido diseñado para centralizar estas operaciones, garantizando la integridad de los registros bajo cualquier carga de trabajo.
+
+II. CAPACIDADES DEL SISTEMA
+El software provee al operador las siguientes funciones integradas:
+
+[INPUT] REGISTRO DE SOLICITUDES: Ingreso de datos mediante folios únicos.
+[QUEUE] PRIORIZACIÓN: Clasificación inteligente de incidencias según urgencia operativa.
+[STACK/LIST] BITÁCORA: Mantenimiento de una secuencia histórica imborrable.
+[TREE/GRAPH] RELACIONES: Mapeo de la estructura jerárquica de sucursales y sus incidencias vinculadas.
+
+III. ARQUITECTURA DE DATOS (ESPECIFICACIONES)
+El sistema opera mediante módulos gestores (Lógica centralizada):
+
+GestorAtencion: Control de la Cola de Prioridad.
+GestorArbol: Organización jerárquica de datos.
+GestorGrafo: Análisis de redes de sucursales.
+GestorHistorial: Bitácora lineal y cronológica.
+
+[SISTEMA LISTO]
