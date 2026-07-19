@@ -47,9 +47,38 @@ RELACIONES DE INTEGRACIÓN:
 [MainBanco] --(1:1)--> [GestorGrafo]
 [MainBanco] --(1:1)--> [GestorHistorial]
 
+-- Diagrama Entidad-Relación (ER) código para mermaid live
+
+erDiagram
+    SOLICITUD ||--o{ HISTORIAL : "registra eventos en"
+    SUCURSAL ||--o{ SOLICITUD : "gestiona"
+    SUCURSAL ||--o{ SUCURSAL : "jerarquia_padre_hijo"
+
+    SOLICITUD {
+        string id_folio PK
+        string tipo_incidencia
+        int prioridad
+        string estado
+        string id_sucursal FK
+    }
+
+    SUCURSAL {
+        string id_sucursal PK
+        string nombre
+        string ubicacion
+        string id_padre FK
+    }
+
+    HISTORIAL {
+        string id_registro PK
+        string id_folio FK
+        date fecha_evento
+        string descripcion
+    }
+
 **************************************************************************
 
--- Para mermaid live
+-- Diagrama UML código para mermaid live
 
 classDiagram 
     class MainBanco {
